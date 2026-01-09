@@ -1,12 +1,16 @@
+import java.util.Objects;
+
 public class Customer {
 
+    private int customer_id;
     private String name;
     private int creditLimit;
     private String email;
     private static String shopName;
 
-    public Customer(String name, int creditLimit,String email,String shopName){
+    public Customer(int customer_id, String name, int creditLimit,String email,String shopName){
         this.name = name;
+        this.customer_id = customer_id;
         this.creditLimit = creditLimit;
         this.email = email;
         Customer.shopName = shopName;
@@ -19,11 +23,11 @@ public class Customer {
     
     
     public Customer(){
-        this("Default Name",0,"Default mail","Default Shop");
+        this(0,"Default Name",0,"Default mail","Default Shop");
     }
 
-    public Customer(String name, String email,String shopName){
-        this(name,0,email,shopName);
+    public Customer(int id, String name, String email,String shopName){
+        this(id,name,0,email,shopName);
     }
 
     public String getName(){
@@ -38,4 +42,22 @@ public class Customer {
         return email;
     }
     
+    @Override
+    public boolean equals(Object obj){
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        Customer customer = (Customer) obj;
+        return customer_id == customer.customer_id &&
+       Objects.equals(name, customer.name) &&
+       Objects.equals(email, customer.email);
+    }
+
+    @Override
+    public int hashCode(){
+        return Objects.hash(customer_id,name,email);
+    }
 }
