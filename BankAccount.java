@@ -60,7 +60,7 @@ public class BankAccount {
 
     public void Withdraw(int amount){
         if(amount > balance){
-            System.out.println("Insufficient Funds");
+            throw new InsufficientBalanceException("Not enough balance");
         }
         else{
             balance =balance -amount;
@@ -81,6 +81,12 @@ public class BankAccount {
         System.out.println("Email id: "+ email);
         System.out.println("Phone no: "+ phoneNo);
         System.out.println("Account Number: "+ accountNumber);
+    }
+
+    public class InsufficientBalanceException extends RuntimeException{
+        public InsufficientBalanceException(String message){
+            super(message);
+        }
     }
 
     
